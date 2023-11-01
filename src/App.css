@@ -1,3 +1,15 @@
 body {
     background-color: #E5E7EB;
 }
+
+.checkbox-item {
+    display: none;
+}
+
+.checkbox-item:checked {
+    display: block;
+}
+
+.image-item:hover .checkbox-item {
+    display: block;
+}

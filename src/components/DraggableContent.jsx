@@ -47,8 +47,14 @@ export default function DraggableContent() {
               onDragStart={(index) => onDragStart(index)}
               onDrop={(index) => onDrop(index)}
             >
-              <div className="border border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
+              <div className="image-item border border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
                 <img src={item.img} alt="item" />
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value=""
+                  class="checkbox-item w-4 h-4 z-20 absolute top-6 left-6 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                ></input>
               </div>
             </DraggableItem>
           </div>
