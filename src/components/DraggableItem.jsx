@@ -69,21 +69,19 @@ export default function DraggableItem(props) {
     props.onDrop(props.index);
   };
   return (
-    <>
-      <li
-        ref={itemRef}
-        className="draggable-list__item"
-        draggable={props.draggable !== undefined ? props.draggable : true}
-        onDragStart={onDragStart}
-        onDrag={onDrag}
-        onDragEnd={onDragEnd}
-        onDragEnter={onDragEnter}
-        onDragLeave={onDragLeave}
-        onDragOver={onDragOver}
-        onDrop={onDrop}
-      >
-        {props.children}
-      </li>
-    </>
+    <div
+      ref={itemRef}
+      className="draggable-list__item"
+      draggable={props.draggable !== undefined ? props.draggable : true}
+      onDragStart={onDragStart}
+      onDrag={onDrag}
+      onDragEnd={onDragEnd}
+      onDragEnter={onDragEnter}
+      onDragLeave={onDragLeave}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+    >
+      {props.children}
+    </div>
   );
 }

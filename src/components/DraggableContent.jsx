@@ -36,16 +36,22 @@ export default function DraggableContent() {
   };
   return (
     <>
-      <ul>
+      <div className="grid grid-cols-5 gap-4 bg-white p-3">
         {data.map((item, index) => (
-          <DraggableItem
-            key={index}
-            index={index}
-            onDragStart={(index) => onDragStart(index)}
-            onDrop={(index) => onDrop(index)}
+          <div
+            className={`${index === 0 ? "col-span-2 row-span-2" : ""} w-full`}
           >
-            <img src={item.img} width="30px" alt="item" />
-          </DraggableItem>
+            <DraggableItem
+              key={index}
+              index={index}
+              onDragStart={(index) => onDragStart(index)}
+              onDrop={(index) => onDrop(index)}
+            >
+              <div className="border border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
+                <img src={item.img} alt="item" />
+              </div>
+            </DraggableItem>
+          </div>
         ))}
         {/*
                 add last item so you can drag item to last position
@@ -57,7 +63,7 @@ export default function DraggableContent() {
           draggale={false}
           onDrop={(index) => onDrop(index)}
         />
-      </ul>
+      </div>
     </>
   );
 }
