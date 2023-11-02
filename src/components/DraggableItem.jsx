@@ -71,7 +71,7 @@ export default function DraggableItem(props) {
   return (
     <div
       ref={itemRef}
-      className="draggable-list__item"
+      className="z-50"
       draggable={props.draggable !== undefined ? props.draggable : true}
       onDragStart={onDragStart}
       onDrag={onDrag}

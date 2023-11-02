@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { ItemList } from "../assets/js/itemList";
 import DraggableItem from "./DraggableItem";
+import { FaRegImage } from "react-icons/fa";
 
 export default function DraggableContent() {
   const [data, setdata] = useState(ItemList);
+  const [itemData, setItemData] = useState([]);
 
   const [dragStartIndex, setdragStartIndex] = useState(null);
 
@@ -34,12 +36,22 @@ export default function DraggableContent() {
       ]);
     }
   };
+
+  const handleChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setItemData([...itemData, value]);
+    } else {
+      setItemData(itemData.filter((e) => e !== value));
+    }
+  };
   return (
     <>
-      <div className="grid grid-cols-5 gap-4 bg-white p-3">
+      <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 bg-white p-9">
         {data.map((item, index) => (
           <div
             className={`${index === 0 ? "col-span-2 row-span-2" : ""} w-full`}
+            key={`draggable_item-${index}`}
           >
             <DraggableItem
               key={index}
@@ -47,13 +59,14 @@ export default function DraggableContent() {
               onDragStart={(index) => onDragStart(index)}
               onDrop={(index) => onDrop(index)}
             >
-              <div className="image-item border border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
+              <div className="image-item border-2 border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
                 <img src={item.img} alt="item" />
                 <input
                   id="default-checkbox"
                   type="checkbox"
-                  value=""
-                  class="checkbox-item w-4 h-4 z-20 absolute top-6 left-6 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                  value={item.img}
+                  onChange={handleChange}
+                  className="checkbox-item w-4 h-4 z-20 absolute top-6 left-6 text-blue-600 bg-gray-100 border-gray-300 rounded"
                 ></input>
               </div>
             </DraggableItem>
@@ -63,12 +76,17 @@ export default function DraggableContent() {
                 add last item so you can drag item to last position
                 last item dont need onDragStart because it can not be draged
             */}
-        <DraggableItem
-          key={data.length}
-          index={data.length}
-          draggale={false}
-          onDrop={(index) => onDrop(index)}
-        />
+        <div className="image-item border-2 border-dashed border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
+          <div className="flex justify-center items-center h-full">
+            <div>
+              <FaRegImage
+                className="mx-auto max-w-[1rem] md:max-w-[2rem]"
+                size="2rem"
+              />
+              <p className="text-[10px] md:text-xl mt-1 md:mt-4">Add Images</p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
