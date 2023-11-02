@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { ItemList } from "../assets/js/itemList";
+import React, { useContext, useState } from "react";
 import DraggableItem from "./DraggableItem";
 import { FaRegImage } from "react-icons/fa";
+import { AppContext } from "../AppContext";
 
 export default function DraggableContent() {
-  const [data, setdata] = useState(ItemList);
-  const [itemData, setItemData] = useState([]);
+  const { contentData, setContentData, selectedItem, setSelectedItem } =
+    useContext(AppContext);
 
   const [dragStartIndex, setdragStartIndex] = useState(null);
 
@@ -15,21 +15,21 @@ export default function DraggableContent() {
   // update list when item dropped
   const onDrop = (dropIndex) => {
     // get draged item
-    const dragItem = data[dragStartIndex];
+    const dragItem = contentData[dragStartIndex];
 
     // delete draged item in list
-    let list = [...data];
+    let list = [...contentData];
     list.splice(dragStartIndex, 1);
 
     // update list
     if (dragStartIndex < dropIndex) {
-      setdata([
+      setContentData([
         ...list.slice(0, dropIndex - 1),
         dragItem,
         ...list.slice(dropIndex - 1, list.length),
       ]);
     } else {
-      setdata([
+      setContentData([
         ...list.slice(0, dropIndex),
         dragItem,
         ...list.slice(dropIndex, list.length),
@@ -40,15 +40,15 @@ export default function DraggableContent() {
   const handleChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
-      setItemData([...itemData, value]);
+      setSelectedItem([...selectedItem, value]);
     } else {
-      setItemData(itemData.filter((e) => e !== value));
+      setSelectedItem(selectedItem.filter((e) => e !== value));
     }
   };
   return (
     <>
       <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 bg-white p-9">
-        {data.map((item, index) => (
+        {contentData.map((item, index) => (
           <div
             className={`${index === 0 ? "col-span-2 row-span-2" : ""} w-full`}
             key={`draggable_item-${index}`}
@@ -62,10 +62,11 @@ export default function DraggableContent() {
               <div className="image-item border-2 border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
                 <img src={item.img} alt="item" />
                 <input
+                  checked={selectedItem.find((el) => el === item.img)}
                   id="default-checkbox"
                   type="checkbox"
                   value={item.img}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                   className="checkbox-item w-4 h-4 z-20 absolute top-6 left-6 text-blue-600 bg-gray-100 border-gray-300 rounded"
                 ></input>
               </div>
