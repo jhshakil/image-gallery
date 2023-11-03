@@ -37,6 +37,7 @@ export default function DraggableContent() {
     }
   };
 
+  // checkbox event
   const handleChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
@@ -48,6 +49,7 @@ export default function DraggableContent() {
   return (
     <>
       <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 bg-white p-9">
+        {/* full draggable content */}
         {contentData.map((item, index) => (
           <div
             className={`${index === 0 ? "col-span-2 row-span-2" : ""} w-full`}
@@ -73,10 +75,8 @@ export default function DraggableContent() {
             </DraggableItem>
           </div>
         ))}
-        {/*
-                add last item so you can drag item to last position
-                last item dont need onDragStart because it can not be draged
-            */}
+
+        {/* last add image section  */}
         <div className="image-item border-2 border-dashed border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
           <div className="flex justify-center items-center h-full">
             <div>

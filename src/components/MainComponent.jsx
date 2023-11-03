@@ -15,6 +15,7 @@ export default function MainComponent() {
     }
   };
 
+  // delete item
   const deleteItems = (data) => {
     let filterItem = contentData.filter((item) => !data.includes(item.img));
     setContentData(filterItem);
@@ -23,6 +24,7 @@ export default function MainComponent() {
   return (
     <div className="container mx-auto px-4">
       <div className="mt-5 w-full lg:w-3/4 mx-auto">
+        {/* top section  */}
         <div className="px-9 py-4 bg-white rounded-t-lg border-b-2 flex justify-between items-center">
           <div>
             {selectedItem && selectedItem.length ? (
@@ -53,6 +55,7 @@ export default function MainComponent() {
             delete files
           </p>
         </div>
+        {/* content section  */}
         <DraggableContent />
       </div>
     </div>

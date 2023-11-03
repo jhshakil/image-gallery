@@ -13,3 +13,16 @@ body {
 .image-item:hover .checkbox-item {
     display: block;
 }
+
+.draggable-list__item {
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.draggable-list__item.dragstart {
+    opacity: 0.5;
+}
+
+.draggable-list__item.dragover {
+    border-color: #164863;
+}
