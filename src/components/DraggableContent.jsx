@@ -61,7 +61,13 @@ export default function DraggableContent() {
               onDragStart={(index) => onDragStart(index)}
               onDrop={(index) => onDrop(index)}
             >
-              <div className="image-item border-2 border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
+              <div
+                className={`image-item border-2 border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full ${
+                  selectedItem.find((el) => el === item.img)
+                    ? "before:bg-gray-300"
+                    : "before:bg-transparent"
+                } before:bg-transparent hover:before:bg-gray-300 before:opacity-30`}
+              >
                 <img src={item.img} alt="item" />
                 <input
                   checked={selectedItem.find((el) => el === item.img)}
@@ -69,7 +75,7 @@ export default function DraggableContent() {
                   type="checkbox"
                   value={item.img}
                   onChange={(e) => handleChange(e)}
-                  className="checkbox-item w-4 h-4 z-20 absolute top-6 left-6 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                  className="checkbox-item w-4 h-4 z-20 absolute top-5 left-5 text-blue-600 bg-gray-100 border-gray-300 rounded"
                 ></input>
               </div>
             </DraggableItem>
@@ -77,7 +83,7 @@ export default function DraggableContent() {
         ))}
 
         {/* last add image section  */}
-        <div className="image-item border-2 border-dashed border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
+        <div className="image-item border-2 py-6 border-dashed border-gray-200 rounded-lg overflow-hidden relative before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-full before:w-full before:bg-transparent hover:before:bg-gray-300 before:opacity-30">
           <div className="flex justify-center items-center h-full">
             <div>
               <FaRegImage

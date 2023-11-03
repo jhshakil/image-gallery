@@ -26,3 +26,7 @@ body {
 .draggable-list__item.dragover {
     border-color: #164863;
 }
+
+.pointer-event-none {
+    pointer-events: none;
+}

@@ -52,7 +52,7 @@ export default function MainComponent() {
             className="text-red-600 cursor-pointer"
             onClick={() => deleteItems(selectedItem)}
           >
-            delete files
+            Delete files
           </p>
         </div>
         {/* content section  */}
